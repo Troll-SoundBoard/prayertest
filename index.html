@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prayer Tracker</title>
-<link rel='stylesheet' href='style.css'>
-<script src='app.js' defer></script>
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
 </head>
 <body>
 
@@ -13,59 +13,57 @@
   <h2>Welcome 🌙</h2>
   <input id="username" placeholder="Username *">
   <p id="error"></p>
-  <p id="locationText">Detecting location…</p>
   <button id="enter">Enter</button>
 </div>
 
 <div id="app" class="screen">
-<header class="top">
-  <div class="avatar" id="navAvatar"></div>
-  <div id="greet"></div>
-  <div id="streakBox" class="hidden">
-    <div class="moon" id="moon"></div>
-    <div id="streak"></div>
-  </div>
-  <div id="where"></div>
-</header>
+  <header class="top">
+    <div id="greet"></div>
+    <div id="streakBox" class="hidden">
+      <div class="moon"></div>
+      <div id="streak"></div>
+    </div>
+    <div id="where"></div>
+  </header>
 
-<main>
-<section id="home" class="page active">
-  <ul id="prayers"></ul>
-</section>
+  <main>
+    <section id="home" class="page active">
+      <h3>Today's Prayers</h3>
+      <ul id="prayers"></ul>
+    </section>
 
-<section id="calendar" class="page">
-  <div id="calendarGrid"></div>
-</section>
+    <section id="calendar" class="page">
+      <h3>Calendar</h3>
+      <div id="calendarGrid"></div>
+    </section>
 
-<section id="settings" class="page">
-  <div class="card">
-    <h3>Profile</h3>
-    <input id="editName">
-    <input id="bio" placeholder="Bio">
-    <input type="file" id="avatarInput">
-  </div>
-  <div class="card danger">
-    <button id="signout">Sign Out</button>
-  </div>
-</section>
-</main>
+    <section id="settings" class="page">
+      <div class="card">
+        <h3>Profile</h3>
+        <input id="editName" placeholder="Username">
+      </div>
+      <div class="card danger">
+        <button id="signout">Sign Out</button>
+      </div>
+    </section>
+  </main>
 
-<nav class="nav">
-  <button data-target="home" class="active">Home</button>
-  <button data-target="calendar">Calendar</button>
-  <button data-target="settings">Settings</button>
-</nav>
+  <nav class="nav">
+    <button data-target="home" class="active">Home</button>
+    <button data-target="calendar">Calendar</button>
+    <button data-target="settings">Settings</button>
+  </nav>
 </div>
 
 <div id="modal" class="modal hidden">
- <div class="modal-box">
-  <h3>Sign out?</h3>
-  <p>This will erase everything.</p>
-  <div class="modal-actions">
-   <button id="confirm">Yes</button>
-   <button id="cancel">Cancel</button>
+  <div class="modal-box">
+    <h3>Sign out?</h3>
+    <p>This will erase all data.</p>
+    <div class="modal-actions">
+      <button id="confirm">Yes</button>
+      <button id="cancel">Cancel</button>
+    </div>
   </div>
- </div>
 </div>
 
 </body>

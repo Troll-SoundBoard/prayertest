@@ -2,33 +2,24 @@ const prayers=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
 const today=new Date().toISOString().slice(0,10);
 let data=JSON.parse(localStorage.getItem('data'))||{history:{},profile:{}};
 
-function moonPhase(){
- const d=new Date();
- const lp=2551443;
- const now=d.getTime()/1000;
- const new_moon=592500;
- const phase=((now-new_moon)%lp)/lp;
- return phase;
-}
-
-function renderMoon(){
- const p=moonPhase();
- moon.style.boxShadow=`0 0 ${30+50*p}px white`;
-}
-
 enter.onclick=()=>{
- if(!username.value.trim()){error.innerText='Username required';return;}
- data.profile.name=username.value;
+ if(!username.value.trim()){
+  error.innerText='Username required';
+  return;
+ }
+ data.profile.name=username.value.trim();
  localStorage.setItem('data',JSON.stringify(data));
- signup.classList.remove('active');app.classList.add('active');
+ signup.classList.remove('active');
+ app.classList.add('active');
  init();
 };
 
 function init(){
  greet.innerText='Hi '+data.profile.name;
  editName.value=data.profile.name;
- if(data.profile.avatar) navAvatar.style.background=`url(${data.profile.avatar}) center/cover`;
- renderPrayers();renderCalendar();calcStreak();renderMoon();
+ renderPrayers();
+ renderCalendar();
+ calcStreak();
 }
 
 function renderPrayers(){
@@ -41,7 +32,9 @@ function renderPrayers(){
   li.onclick=()=>{
    data.history[today][p]=!data.history[today][p];
    localStorage.setItem('data',JSON.stringify(data));
-   renderPrayers();renderCalendar();calcStreak();
+   renderPrayers();
+   renderCalendar();
+   calcStreak();
   };
   prayersEl.appendChild(li);
  });
@@ -71,33 +64,30 @@ function calcStreak(){
  }
  if(s>=2){
   streakBox.classList.remove('hidden');
-  streak.innerText=`${s} days in a row 🔥`;
+  streak.innerText=s+' days in a row 🔥';
+ } else {
+  streakBox.classList.add('hidden');
  }
 }
 
-avatarInput.onchange=e=>{
- const r=new FileReader();
- r.onload=()=>{
-  data.profile.avatar=r.result;
-  localStorage.setItem('data',JSON.stringify(data));
-  navAvatar.style.background=`url(${r.result}) center/cover`;
- };
- r.readAsDataURL(e.target.files[0]);
-};
-
-signout.onclick=()=>modal.classList.remove('hidden');
-cancel.onclick=()=>modal.classList.add('hidden');
-confirm.onclick=()=>{localStorage.clear();location.reload();};
-
-document.querySelectorAll('.nav button').forEach(b=>{
- b.onclick=()=>{
+document.querySelectorAll('.nav button').forEach(btn=>{
+ btn.onclick=()=>{
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(b.dataset.target).classList.add('active');
-  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
+  document.getElementById(btn.dataset.target).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
  };
 });
 
+signout.onclick=()=>modal.classList.remove('hidden');
+cancel.onclick=()=>modal.classList.add('hidden');
+confirm.onclick=()=>{
+ localStorage.clear();
+ location.reload();
+};
+
 if(data.profile.name){
- signup.classList.remove('active');app.classList.add('active');init();
+ signup.classList.remove('active');
+ app.classList.add('active');
+ init();
 }

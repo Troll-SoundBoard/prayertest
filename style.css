@@ -1,28 +1,29 @@
+*{box-sizing:border-box}
 body{margin:0;font-family:-apple-system;background:#020617;color:white}
 .screen{display:none;min-height:100vh}
 .screen.active{display:block}
-#signup{text-align:center;padding-top:35vh}
+#signup{text-align:center;padding-top:40vh}
 input,button{width:90%;padding:14px;margin:10px auto;border-radius:14px;border:none;display:block}
 #error{color:#f87171}
-.top{text-align:center;padding:20px;border-bottom:1px solid #1e293b;position:relative}
+.top{text-align:center;padding:20px;border-bottom:1px solid #1e293b}
 #greet{font-size:26px;font-weight:600}
-.avatar{position:absolute;top:20px;left:20px;width:40px;height:40px;border-radius:50%;background:#334155}
-.moon{width:130px;height:130px;border-radius:50%;margin:10px auto;background:radial-gradient(circle,#fff,#bbb);box-shadow:0 0 40px white}
+.moon{width:100px;height:100px;border-radius:50%;margin:10px auto;background:radial-gradient(circle,#fff,#bbb);box-shadow:0 0 30px white}
 .hidden{display:none}
-main{padding:20px}
+main{padding:20px;padding-bottom:80px}
 .page{display:none}
 .page.active{display:block}
+h3{margin-top:0}
 ul{list-style:none;padding:0}
-li{padding:16px;margin-bottom:12px;background:#1e293b;border-radius:16px;display:flex;justify-content:space-between}
+li{padding:16px;margin-bottom:12px;background:#1e293b;border-radius:16px;display:flex;justify-content:space-between;cursor:pointer}
 li.checked{background:#16a34a}
-.nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#020617}
-.nav button{background:none;border:none;color:#64748b;padding:14px}
+.nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#020617;border-top:1px solid #1e293b}
+.nav button{background:none;border:none;color:#64748b;padding:14px;font-size:15px}
 .nav button.active{color:#3b82f6}
-#calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
-.day{padding:10px;border-radius:10px;text-align:center;font-size:12px;background:#1e293b}
-.day.full{background:#16a34a}
 .card{background:#1e293b;padding:16px;border-radius:16px;margin-bottom:16px}
 .danger{background:#3f1d1d}
+#calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.day{padding:10px;background:#1e293b;border-radius:10px;text-align:center;font-size:12px}
+.day.full{background:#16a34a}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
 .modal.hidden{display:none}
 .modal-box{background:#020617;padding:20px;border-radius:16px;width:80%;text-align:center}
