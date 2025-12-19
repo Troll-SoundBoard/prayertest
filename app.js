@@ -26,8 +26,7 @@ function updateLocation(){useGPS()}
 
 function finishSignup(){
   if(!usernameInput.value||!localStorage.lat){
-    toast('Please enter username and location');
-    return;
+    toast('Please enter username and location');return;
   }
   localStorage.user=usernameInput.value;
   signup.classList.remove('active');
@@ -35,9 +34,35 @@ function finishSignup(){
   load();
 }
 
+function lunarPhase(){
+  const lp=2551443;
+  const now=new Date();
+  const newMoon=new Date('2001-01-24T13:44:00Z');
+  const phase=((now-newMoon)/1000)%lp;
+  return phase/lp;
+}
+
+function applyTimeTheme(){
+  const h=new Date().getHours();
+  document.body.className='';
+  if(h>=6&&h<17){
+    document.body.classList.add('day');
+    timeIcon.innerText='☀️';
+  }else if(h>=17&&h<19){
+    document.body.classList.add('sunset');
+    timeIcon.innerText='🌇';
+  }else{
+    document.body.classList.add('night');
+    const p=lunarPhase();
+    timeIcon.innerText=p<0.25?'🌒':p<0.5?'🌓':p<0.75?'🌔':'🌕';
+  }
+}
+
 async function load(){
+  applyTimeTheme();
   todayTitle.innerText=new Date().toDateString();
   settingsUsername.value=localStorage.user;
+
   const res=await fetch(`https://api.aladhan.com/v1/timings?latitude=${localStorage.lat}&longitude=${localStorage.lon}&method=2`);
   const data=await res.json();
   renderPrayers(data.data.timings);
@@ -106,10 +131,7 @@ function openSignOut(){
 }
 
 function closeModal(){modal.classList.remove('show')}
-
-function doSignOut(){
-  localStorage.clear();location.reload();
-}
+function doSignOut(){localStorage.clear();location.reload()}
 
 function format(t){
   let [h,m]=t.split(':');h=parseInt(h);

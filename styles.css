@@ -1,22 +1,28 @@
 body{
 margin:0;font-family:-apple-system,BlinkMacSystemFont;
-background:#0b1220;color:white;
+color:white;transition:background 1s;
 }
 .screen{display:none;padding:20px}
 .screen.active{display:block}
 .top{text-align:center;font-weight:600}
+
+.day{background:linear-gradient(180deg,#60a5fa,#fef3c7)}
+.sunset{background:linear-gradient(180deg,#fb7185,#f97316,#fde68a)}
+.night{background:linear-gradient(180deg,#020617,#1e293b)}
+
 .tab{display:none}
 .tab.active{display:block}
 
 .prayer{
 display:flex;justify-content:space-between;
-padding:14px;border-bottom:1px solid rgba(255,255,255,.1);
+padding:14px;border-bottom:1px solid rgba(255,255,255,.15);
 }
 .prayer.checked{color:#22c55e}
 
 .bottom-nav{
 position:fixed;bottom:0;left:0;right:0;
-height:70px;background:#0b1220;
+height:70px;background:rgba(0,0,0,.4);
+backdrop-filter:blur(12px);
 display:flex;justify-content:space-around;align-items:center;
 }
 .bottom-nav button{
@@ -42,9 +48,8 @@ display:none;align-items:center;justify-content:center;
 }
 .modal.show{display:flex}
 .modal-box{
-background:#111827;padding:20px;
-border-radius:16px;width:80%;max-width:320px;
-text-align:center;
+background:#111827;padding:20px;border-radius:18px;
+width:80%;max-width:320px;text-align:center;
 }
 .modal-actions{
 display:flex;justify-content:space-between;margin-top:15px;
@@ -52,3 +57,5 @@ display:flex;justify-content:space-between;margin-top:15px;
 .modal-actions button{
 flex:1;margin:0 5px;padding:10px;border:none;border-radius:10px;
 }
+
+#timeIcon{font-size:26px;display:block;margin-bottom:6px}
