@@ -2,46 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prayer Tracker</title>
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
 <body>
 
-<div id="signup" class="page active">
+<div id="signup" class="screen active">
   <h2>Welcome 🌙</h2>
-  <input id="username" placeholder="Username">
+  <input id="username" placeholder="Username" />
   <p id="error"></p>
   <p id="locationText">Detecting location…</p>
-  <button id="enterBtn">Enter</button>
+  <button id="enter">Enter</button>
 </div>
 
-<div id="app" class="hidden">
-  <header id="sky">
-    <div id="stars"></div>
-    <div id="moon"></div>
+<div id="app" class="screen">
+  <header class="sky">
+    <div class="stars"></div>
+    <div class="moon"></div>
     <div id="streak">0 day streak 🔥</div>
     <div id="where"></div>
   </header>
 
-  <section id="home" class="page active">
-    <ul id="prayers"></ul>
-  </section>
+  <main>
+    <section id="home" class="page active">
+      <ul id="prayers"></ul>
+    </section>
 
-  <section id="calendar" class="page">
-    <p style="text-align:center">Calendar ready</p>
-  </section>
+    <section id="calendar" class="page">
+      <p style="text-align:center">Calendar view</p>
+    </section>
 
-  <section id="settings" class="page">
-    <p id="userInfo"></p>
-    <button id="signoutBtn">Sign Out</button>
-  </section>
+    <section id="settings" class="page">
+      <p id="userInfo"></p>
+      <button id="signout">Sign Out</button>
+    </section>
+  </main>
 
   <nav class="nav">
-    <button data-page="home" class="active">Home</button>
-    <button data-page="calendar">Calendar</button>
-    <button data-page="settings">Settings</button>
+    <button data-target="home" class="active">Home</button>
+    <button data-target="calendar">Calendar</button>
+    <button data-target="settings">Settings</button>
   </nav>
 </div>
 
