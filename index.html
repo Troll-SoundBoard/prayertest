@@ -8,48 +8,27 @@
 </head>
 <body>
 
-<section id="signup" class="screen active">
-  <h1>🕌 PrayerTrack</h1>
-  <p>Create your profile</p>
-  <input id="usernameInput" placeholder="Username">
-  <button onclick="useGPS()">📍 Use GPS Location</button>
-  <select id="method">
-    <option value="2">Muslim World League</option>
-    <option value="4">Umm al-Qura</option>
-    <option value="3">ISNA</option>
-  </select>
-  <button class="primary" onclick="finishSignup()">Continue</button>
-</section>
+<header class="hero">
+  <div class="moon"></div>
+  <div class="current">
+    <h1 id="currentPrayer">Isha</h1>
+    <p id="countdown">4 hrs, 31 min left</p>
+    <div class="progress"><div id="bar"></div></div>
+  </div>
+</header>
 
-<section id="app" class="screen">
-  <header class="top">
-    <span id="greeting"></span>
-    <small id="locationText"></small>
-  </header>
+<section class="list" id="prayerList"></section>
 
-  <main>
-    <section id="home" class="tab active">
-      <h2>Today's Prayers</h2>
-      <div id="prayers"></div>
-      <div id="nextPrayer" class="next"></div>
-    </section>
+<footer class="footer">
+  <span id="hijri">Jumada II 10, 1447 AH</span>
+  <span id="location">Manama, Bahrain</span>
+</footer>
 
-    <section id="settings" class="tab">
-      <h2>Settings</h2>
-      <select id="methodSettings" onchange="saveMethod()">
-        <option value="2">Muslim World League</option>
-        <option value="4">Umm al-Qura</option>
-        <option value="3">ISNA</option>
-      </select>
-      <button onclick="testAthan()">Test Athan</button>
-    </section>
-  </main>
-
-  <nav class="bottom-nav">
-    <button onclick="showTab('home',this)" class="active">🏠</button>
-    <button onclick="showTab('settings',this)">⚙️</button>
-  </nav>
-</section>
+<nav class="bottom-nav">
+  <button class="active">🏠</button>
+  <button>📆</button>
+  <button>⚙️</button>
+</nav>
 
 <audio id="athan" src="athan.mp3"></audio>
 <script src="app.js"></script>
