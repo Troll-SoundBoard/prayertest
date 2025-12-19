@@ -24,36 +24,48 @@ function finishSignup(){
 }
 
 async function load(){
+  todayTitle.innerText=new Date().toDateString();
   const res=await fetch(`https://api.aladhan.com/v1/timings?latitude=${localStorage.lat}&longitude=${localStorage.lon}&method=2`);
   const data=await res.json();
-  const t=data.data.timings;
-  renderList(t);
+  renderPrayers(data.data.timings);
+  renderCalendar();
   updateStreak();
 }
 
-function renderList(times){
+function renderPrayers(times){
   prayerList.innerHTML='';
   const history=JSON.parse(localStorage.history||'{}');
   history[today]=history[today]||{};
 
   prayers.forEach(p=>{
-    const row=document.createElement('div');
-    row.className='row'+(history[today][p]?' checked':'');
-    row.innerHTML=`<span>${p}</span><strong>${format(times[p])}</strong>`;
-    row.onclick=()=>{
+    const d=document.createElement('div');
+    d.className='prayer'+(history[today][p]?' checked':'');
+    d.innerHTML=`<span>${p}</span><strong>${format(times[p])}</strong>`;
+    d.onclick=()=>{
       history[today][p]=!history[today][p];
       localStorage.history=JSON.stringify(history);
-      row.classList.toggle('checked');
-      updateStreak();
+      d.classList.toggle('checked');
+      updateStreak();renderCalendar();
     };
-    prayerList.appendChild(row);
+    prayerList.appendChild(d);
+  });
+}
+
+function renderCalendar(){
+  const history=JSON.parse(localStorage.history||'{}');
+  calendarList.innerHTML='';
+  Object.keys(history).sort().reverse().forEach(day=>{
+    const done=Object.values(history[day]).filter(Boolean).length;
+    const div=document.createElement('div');
+    div.className='prayer';
+    div.innerText=`${day}: ${done}/5 prayers`;
+    calendarList.appendChild(div);
   });
 }
 
 function updateStreak(){
   const history=JSON.parse(localStorage.history||'{}');
-  let streak=0;
-  let d=new Date();
+  let streak=0;let d=new Date();
   while(true){
     const key=d.toISOString().split('T')[0];
     if(history[key]&&Object.values(history[key]).filter(Boolean).length===5){
@@ -63,10 +75,16 @@ function updateStreak(){
   streakEl.innerText=`${streak} days in a row 🔥`;
 }
 
+function showTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
 function confirmSignOut(){
-  if(confirm("Signing out will delete ALL prayer history, streaks, and profile data. This cannot be undone. Continue?")){
-    localStorage.clear();
-    location.reload();
+  if(confirm("Signing out will delete ALL prayer history, streaks, and profile data. Continue?")){
+    localStorage.clear();location.reload();
   }
 }
 

@@ -10,26 +10,40 @@
 
 <section id="signup" class="screen active">
   <h1>🕌 PrayerTrack</h1>
-  <p>Set up your profile</p>
   <input id="usernameInput" placeholder="Username">
   <button onclick="useGPS()">📍 Use GPS</button>
   <button class="primary" onclick="finishSignup()">Continue</button>
 </section>
 
 <section id="app" class="screen">
-  <header class="hero">
-    <div id="icon" class="icon">🌙</div>
-    <h1 id="currentPrayer"></h1>
-    <p id="countdown"></p>
-    <div class="streak" id="streak"></div>
+  <header class="top">
+    <span id="streak"></span>
   </header>
 
-  <section class="list" id="prayerList"></section>
+  <main>
+    <section id="home" class="tab active">
+      <h2 id="todayTitle"></h2>
+      <div id="prayerList"></div>
+    </section>
 
-  <button class="signout" onclick="confirmSignOut()">Sign Out</button>
+    <section id="calendar" class="tab">
+      <h2>Prayer History</h2>
+      <div id="calendarList"></div>
+    </section>
+
+    <section id="settings" class="tab">
+      <h2>Settings</h2>
+      <button class="danger" onclick="confirmSignOut()">Sign Out</button>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="active" onclick="showTab('home',this)">🏠</button>
+    <button onclick="showTab('calendar',this)">📆</button>
+    <button onclick="showTab('settings',this)">⚙️</button>
+  </nav>
 </section>
 
-<audio id="athan" src="athan.mp3"></audio>
 <script src="app.js"></script>
 </body>
 </html>

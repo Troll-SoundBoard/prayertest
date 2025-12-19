@@ -1,23 +1,26 @@
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont;
-background:#0b1220;
-color:white;
+margin:0;font-family:-apple-system,BlinkMacSystemFont;
+background:#0b1220;color:white;
 }
 .screen{display:none;padding:20px}
 .screen.active{display:block}
-.hero{text-align:center;padding:20px}
-.icon{font-size:48px}
-.streak{margin-top:10px;font-weight:600}
-.list{margin-top:20px}
-.row{
+.top{text-align:center;font-weight:600}
+.tab{display:none}
+.tab.active{display:block}
+.prayer{
 display:flex;justify-content:space-between;
 padding:14px;border-bottom:1px solid rgba(255,255,255,.1);
 }
-.row.checked{color:#22c55e}
-button{
-width:100%;padding:14px;margin-top:20px;
-border-radius:14px;border:none;
+.prayer.checked{color:#22c55e}
+.bottom-nav{
+position:fixed;bottom:0;left:0;right:0;
+height:70px;background:#0b1220;
+display:flex;justify-content:space-around;align-items:center;
 }
+.bottom-nav button{
+width:52px;height:52px;border-radius:50%;
+border:none;background:#1f2937;color:white;font-size:20px;
+}
+.bottom-nav button.active{background:#2563eb}
 .primary{background:#2563eb;color:white}
-.signout{background:#991b1b;color:white}
+.danger{background:#991b1b;color:white}
