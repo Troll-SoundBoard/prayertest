@@ -1,14 +1,19 @@
 const prayers=['Fajr','Dhuhr','Asr','Maghrib','Isha']
 const list=document.getElementById('prayers')
+let coords=null
+
+navigator.geolocation.getCurrentPosition(pos=>{
+  coords={lat:pos.coords.latitude,lon:pos.coords.longitude}
+  gpsStatus.innerText=`📍 ${coords.lat.toFixed(2)}, ${coords.lon.toFixed(2)}`
+},()=>gpsStatus.innerText='Location denied')
 
 function startApp(){
   const u=username.value.trim()
-  const l=location.value.trim()
-  if(!u||!l) return
-  localStorage.setItem('user',JSON.stringify({u,l}))
+  if(!u||!coords) return
+  localStorage.setItem('user',JSON.stringify({u,coords}))
   signup.classList.add('hidden')
   app.classList.remove('hidden')
-  document.getElementById('userInfo').innerText=`Hi ${u} • ${l}`
+  userInfo.innerText=`Hi ${u}`
 }
 
 function signOut(){
@@ -28,10 +33,12 @@ function render(){
     list.appendChild(li)
   })
 }
+
 function save(){
   localStorage.setItem('state',JSON.stringify(state))
   render()
 }
+
 function show(id,btn){
   document.querySelectorAll('#app .page').forEach(p=>p.classList.remove('active'))
   document.getElementById(id).classList.add('active')
@@ -43,6 +50,7 @@ const user=JSON.parse(localStorage.getItem('user'))
 if(user){
   signup.classList.add('hidden')
   app.classList.remove('hidden')
-  document.getElementById('userInfo').innerText=`Hi ${user.u} • ${user.l}`
+  userInfo.innerText=`Hi ${user.u}`
 }
+
 render()
