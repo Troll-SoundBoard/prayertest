@@ -1,38 +1,65 @@
-*{box-sizing:border-box}
-body{
-margin:0;font-family:-apple-system,BlinkMacSystemFont;
-color:white;height:100vh;
-background:linear-gradient(180deg,#020617,#020617);
+
+body {
+  margin: 0;
+  font-family: system-ui;
+  background: radial-gradient(circle at top, #0b1d2a, #000814);
+  color: white;
+  min-height: 100vh;
 }
-.screen{padding:20px;padding-bottom:110px}
-.hidden{display:none}
-input,button{
-width:100%;padding:12px;margin:10px 0;border-radius:12px;border:none;
+.screen {
+  padding: 20px;
 }
-button{background:#38bdf8;color:black;font-weight:600}
-.navbar{
-position:fixed;bottom:0;left:0;right:0;
-display:flex;justify-content:space-around;
-background:rgba(0,0,0,.5);backdrop-filter:blur(10px);
-padding:14px
+.hidden { display: none; }
+
+input, textarea, button {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 14px;
+  border: none;
 }
-.navbar button{background:none;color:#94a3b8}
-.navbar button.active{color:#38bdf8}
-.card{
-background:rgba(255,255,255,.08);
-border-radius:20px;padding:16px;margin:16px 0
+
+button {
+  background: #38bdf8;
+  color: black;
+  font-weight: bold;
 }
-.prayer{
-display:flex;justify-content:space-between;align-items:center;
-padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)
+
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 15px;
 }
-.prayer.checked{color:#22c55e}
-.moon{
-width:140px;height:140px;border-radius:50%;
-margin:20px auto;
-background:radial-gradient(circle at 30% 30%,#fff,#aaa);
-box-shadow:0 0 60px rgba(255,255,255,.6)
+
+.prayer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.6)}
-.modal-box{background:#020617;padding:24px;border-radius:16px;width:80%;text-align:center}
-.row{display:flex;gap:10px}
+
+.prayer.checked span {
+  color: #22c55e;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #020617;
+  padding: 20px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 320px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}

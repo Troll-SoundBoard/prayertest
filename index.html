@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +8,27 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="auth" class="screen">
+<div id="signup" class="screen">
   <h1>Welcome</h1>
   <input id="username" placeholder="Username *">
-  <input id="bio" placeholder="Bio (optional)">
-  <button onclick="signup()">Enter</button>
+  <textarea id="bio" placeholder="Bio (optional)"></textarea>
+  <button onclick="enterApp()">Continue</button>
 </div>
 
 <div id="app" class="screen hidden">
-  <div id="content"></div>
-  <nav class="navbar">
-    <button onclick="nav('home')" id="nav-home">Home</button>
-    <button onclick="nav('calendar')" id="nav-calendar">Calendar</button>
-    <button onclick="nav('badges')" id="nav-badges">Badges</button>
-    <button onclick="nav('settings')" id="nav-settings">Settings</button>
-  </nav>
+  <h1 id="hiUser"></h1>
+  <p id="streak" class="hidden"></p>
+
+  <div class="card">
+    <h2>Today's Prayers</h2>
+    <div class="prayer"><span>Fajr</span><input type="checkbox" onchange="togglePrayer(this)"></div>
+    <div class="prayer"><span>Dhuhr</span><input type="checkbox" onchange="togglePrayer(this)"></div>
+    <div class="prayer"><span>Asr</span><input type="checkbox" onchange="togglePrayer(this)"></div>
+    <div class="prayer"><span>Maghrib</span><input type="checkbox" onchange="togglePrayer(this)"></div>
+    <div class="prayer"><span>Isha</span><input type="checkbox" onchange="togglePrayer(this)"></div>
+  </div>
+
+  <button class="signout" onclick="openModal()">Sign out</button>
 </div>
 
 <div id="modal" class="modal hidden">
@@ -35,6 +42,6 @@
   </div>
 </div>
 
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
