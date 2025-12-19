@@ -1,93 +1,64 @@
-const prayers=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
-const today=new Date().toISOString().slice(0,10);
-let data=JSON.parse(localStorage.getItem('data'))||{history:{},profile:{}};
+let page='home';
+let user=JSON.parse(localStorage.user||'null');
+let prayers=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+let today=new Date().toDateString();
+let checks=JSON.parse(localStorage.checks||'{}');
 
-enter.onclick=()=>{
- if(!username.value.trim()){
-  error.innerText='Username required';
-  return;
- }
- data.profile.name=username.value.trim();
- localStorage.setItem('data',JSON.stringify(data));
- signup.classList.remove('active');
- app.classList.add('active');
- init();
-};
-
-function init(){
- greet.innerText='Hi '+data.profile.name;
- editName.value=data.profile.name;
- renderPrayers();
- renderCalendar();
- calcStreak();
+if(!user){
+  user={name:'User',streak:2};
+  localStorage.user=JSON.stringify(user);
 }
 
-function renderPrayers(){
- prayersEl.innerHTML='';
- if(!data.history[today]) data.history[today]={};
- prayers.forEach(p=>{
-  const li=document.createElement('li');
-  li.className=data.history[today][p]?'checked':'';
-  li.innerHTML=`<span>${p}</span><span>${data.history[today][p]?'✓':''}</span>`;
-  li.onclick=()=>{
-   data.history[today][p]=!data.history[today][p];
-   localStorage.setItem('data',JSON.stringify(data));
-   renderPrayers();
-   renderCalendar();
-   calcStreak();
-  };
-  prayersEl.appendChild(li);
- });
+function go(p){
+  page=p;
+  document.querySelectorAll('.navbar button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nav-'+p).classList.add('active');
+  render();
 }
 
-function renderCalendar(){
- calendarGrid.innerHTML='';
- const now=new Date();
- const days=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
- for(let i=1;i<=days;i++){
-  const d=new Date(now.getFullYear(),now.getMonth(),i).toISOString().slice(0,10);
-  const el=document.createElement('div');
-  el.className='day';
-  if(data.history[d] && prayers.every(p=>data.history[d][p])) el.classList.add('full');
-  el.innerText=i;
-  calendarGrid.appendChild(el);
- }
+function render(){
+  let app=document.getElementById('app');
+  if(page==='home'){
+    app.innerHTML=`
+      <h1 style="border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:10px">
+        Hi ${user.name}
+      </h1>
+      ${user.streak>=2?`<h3>${user.streak} days in a row 🔥</h3><div class="moon"></div>`:''}
+      <div class="card">
+        <h2>Today's Prayers</h2>
+        ${prayers.map(p=>`
+          <div class="prayer">
+            <span>${p}</span>
+            <input type="checkbox" ${checks[today]?.includes(p)?'checked':''}
+            onchange="toggle('${p}',this.checked)"/>
+          </div>`).join('')}
+      </div>`;
+  }
+  if(page==='calendar'){
+    app.innerHTML='<h2>Calendar</h2><p>(basic grid coming next)</p>';
+  }
+  if(page==='settings'){
+    app.innerHTML=`
+      <h2>Profile</h2>
+      <div class="card">
+        <input value="${user.name}" 
+        oninput="user.name=this.value;localStorage.user=JSON.stringify(user);render()"/>
+      </div>
+      <div class="card">
+        <button onclick="openModal()">Sign out</button>
+      </div>`;
+  }
 }
 
-function calcStreak(){
- let s=0;
- for(let i=0;i<30;i++){
-  const d=new Date();d.setDate(d.getDate()-i);
-  const k=d.toISOString().slice(0,10);
-  if(data.history[k] && prayers.every(p=>data.history[k][p])) s++;
-  else break;
- }
- if(s>=2){
-  streakBox.classList.remove('hidden');
-  streak.innerText=s+' days in a row 🔥';
- } else {
-  streakBox.classList.add('hidden');
- }
+function toggle(p,val){
+  checks[today]=checks[today]||[];
+  if(val){checks[today].push(p);}
+  else{checks[today]=checks[today].filter(x=>x!==p);}
+  localStorage.checks=JSON.stringify(checks);
 }
 
-document.querySelectorAll('.nav button').forEach(btn=>{
- btn.onclick=()=>{
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(btn.dataset.target).classList.add('active');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
- };
-});
+function openModal(){document.getElementById('modal').classList.remove('hidden');}
+function closeModal(){document.getElementById('modal').classList.add('hidden');}
+function confirmSignOut(){localStorage.clear();location.reload();}
 
-signout.onclick=()=>modal.classList.remove('hidden');
-cancel.onclick=()=>modal.classList.add('hidden');
-confirm.onclick=()=>{
- localStorage.clear();
- location.reload();
-};
-
-if(data.profile.name){
- signup.classList.remove('active');
- app.classList.add('active');
- init();
-}
+go('home');
