@@ -10,8 +10,8 @@
 
 <section id="signup" class="screen active">
   <h1>🕌 PrayerTrack</h1>
-  <p>Create your profile to continue</p>
-  <input id="username" placeholder="Username">
+  <p>Create your profile</p>
+  <input id="usernameInput" placeholder="Username">
   <button onclick="useGPS()">📍 Use GPS Location</button>
   <select id="method">
     <option value="2">Muslim World League</option>
@@ -22,18 +22,32 @@
 </section>
 
 <section id="app" class="screen">
-  <header class="top">PrayerTrack</header>
+  <header class="top">
+    <span id="greeting"></span>
+    <small id="locationText"></small>
+  </header>
 
   <main>
-    <h2>Today's Prayers</h2>
-    <div id="prayers"></div>
-    <div id="nextPrayer" class="next"></div>
+    <section id="home" class="tab active">
+      <h2>Today's Prayers</h2>
+      <div id="prayers"></div>
+      <div id="nextPrayer" class="next"></div>
+    </section>
+
+    <section id="settings" class="tab">
+      <h2>Settings</h2>
+      <select id="methodSettings" onchange="saveMethod()">
+        <option value="2">Muslim World League</option>
+        <option value="4">Umm al-Qura</option>
+        <option value="3">ISNA</option>
+      </select>
+      <button onclick="testAthan()">Test Athan</button>
+    </section>
   </main>
 
   <nav class="bottom-nav">
-    <button class="active">🏠</button>
-    <button>📆</button>
-    <button>👤</button>
+    <button onclick="showTab('home',this)" class="active">🏠</button>
+    <button onclick="showTab('settings',this)">⚙️</button>
   </nav>
 </section>
 
