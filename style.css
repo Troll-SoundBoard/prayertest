@@ -1,0 +1,51 @@
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  background:linear-gradient(#0a2342,#000);
+  color:white;
+}
+#sky{
+  text-align:center;
+  padding:40px 0;
+}
+#moon{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff,#aaa);
+  margin:0 auto;
+  box-shadow:0 0 40px rgba(255,255,255,.8);
+}
+#streak{
+  margin-top:15px;
+  font-size:18px;
+}
+#prayers{
+  list-style:none;
+  padding:20px;
+}
+#prayers li{
+  background:rgba(255,255,255,.1);
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:14px;
+  display:flex;
+  justify-content:space-between;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  background:#111;
+  padding:10px 0;
+}
+.bottom-nav button{
+  background:none;
+  border:none;
+  color:#888;
+}
+.bottom-nav button.active{
+  color:#4da3ff;
+}
