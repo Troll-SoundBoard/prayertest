@@ -8,27 +8,26 @@
 </head>
 <body>
 
-<header class="hero">
-  <div class="moon"></div>
-  <div class="current">
-    <h1 id="currentPrayer">Isha</h1>
-    <p id="countdown">4 hrs, 31 min left</p>
-    <div class="progress"><div id="bar"></div></div>
-  </div>
-</header>
+<section id="signup" class="screen active">
+  <h1>🕌 PrayerTrack</h1>
+  <p>Set up your profile</p>
+  <input id="usernameInput" placeholder="Username">
+  <button onclick="useGPS()">📍 Use GPS</button>
+  <button class="primary" onclick="finishSignup()">Continue</button>
+</section>
 
-<section class="list" id="prayerList"></section>
+<section id="app" class="screen">
+  <header class="hero">
+    <div id="icon" class="icon">🌙</div>
+    <h1 id="currentPrayer"></h1>
+    <p id="countdown"></p>
+    <div class="streak" id="streak"></div>
+  </header>
 
-<footer class="footer">
-  <span id="hijri">Jumada II 10, 1447 AH</span>
-  <span id="location">Manama, Bahrain</span>
-</footer>
+  <section class="list" id="prayerList"></section>
 
-<nav class="bottom-nav">
-  <button class="active">🏠</button>
-  <button>📆</button>
-  <button>⚙️</button>
-</nav>
+  <button class="signout" onclick="confirmSignOut()">Sign Out</button>
+</section>
 
 <audio id="athan" src="athan.mp3"></audio>
 <script src="app.js"></script>
