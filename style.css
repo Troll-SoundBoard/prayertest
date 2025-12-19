@@ -1,7 +1,7 @@
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background:linear-gradient(#0a2342,#000);
+  background:linear-gradient(#020617,#1e293b);
   color:white;
 }
 #sky{
@@ -16,36 +16,44 @@ body{
   margin:0 auto;
   box-shadow:0 0 40px rgba(255,255,255,.8);
 }
-#streak{
-  margin-top:15px;
-  font-size:18px;
-}
+#streak{margin-top:15px;font-size:18px}
+
+.page{display:none;padding:20px}
+.page.active{display:block}
+
 #prayers{
   list-style:none;
-  padding:20px;
+  padding:0;
 }
 #prayers li{
-  background:rgba(255,255,255,.1);
+  background:#1e293b;
   padding:14px;
-  margin-bottom:10px;
+  margin-bottom:12px;
   border-radius:14px;
   display:flex;
   justify-content:space-between;
+  cursor:pointer;
+  transition:.2s;
 }
+#prayers li.checked{
+  background:#16a34a;
+}
+
 .bottom-nav{
   position:fixed;
   bottom:0;
   width:100%;
   display:flex;
   justify-content:space-around;
-  background:#111;
+  background:#020617;
   padding:10px 0;
 }
 .bottom-nav button{
   background:none;
   border:none;
-  color:#888;
+  color:#64748b;
+  font-size:16px;
 }
 .bottom-nav button.active{
-  color:#4da3ff;
+  color:#3b82f6;
 }

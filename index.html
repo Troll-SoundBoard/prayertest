@@ -8,19 +8,29 @@
 <script src="app.js" defer></script>
 </head>
 <body>
-<div id="app">
-  <div id="sky">
-    <div id="moon"></div>
-    <div id="streak">0 day streak 🔥</div>
-  </div>
 
-  <ul id="prayers"></ul>
-
-  <nav class="bottom-nav">
-    <button class="active">Home</button>
-    <button>Calendar</button>
-    <button>Settings</button>
-  </nav>
+<div id="sky">
+  <div id="moon"></div>
+  <div id="streak">0 day streak 🔥</div>
 </div>
+
+<section id="home" class="page active">
+  <ul id="prayers"></ul>
+</section>
+
+<section id="calendar" class="page">
+  <p style="text-align:center;">Calendar coming soon</p>
+</section>
+
+<section id="settings" class="page">
+  <p style="text-align:center;">Settings coming soon</p>
+</section>
+
+<nav class="bottom-nav">
+  <button class="active" onclick="showPage('home', this)">Home</button>
+  <button onclick="showPage('calendar', this)">Calendar</button>
+  <button onclick="showPage('settings', this)">Settings</button>
+</nav>
+
 </body>
 </html>
