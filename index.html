@@ -11,7 +11,7 @@
 
 <div id="signup" class="screen active">
   <h2>Welcome 🌙</h2>
-  <input id="username" placeholder="Username" />
+  <input id="username" placeholder="Username">
   <p id="error"></p>
   <p id="locationText">Detecting location…</p>
   <button id="enter">Enter</button>
@@ -31,12 +31,18 @@
     </section>
 
     <section id="calendar" class="page">
-      <p style="text-align:center">Calendar view</p>
+      <p style="text-align:center">Calendar ready</p>
     </section>
 
-    <section id="settings" class="page">
-      <p id="userInfo"></p>
-      <button id="signout">Sign Out</button>
+    <section id="settings" class="page settings">
+      <div class="card">
+        <h3>Profile</h3>
+        <p id="userInfo"></p>
+      </div>
+      <div class="card danger">
+        <h3>Sign Out</h3>
+        <button id="signout">Sign Out</button>
+      </div>
     </section>
   </main>
 
@@ -45,6 +51,17 @@
     <button data-target="calendar">Calendar</button>
     <button data-target="settings">Settings</button>
   </nav>
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <h3>Sign out?</h3>
+    <p>This will erase all streaks and prayer history.</p>
+    <div class="modal-actions">
+      <button id="confirm">Yes, sign out</button>
+      <button id="cancel">Cancel</button>
+    </div>
+  </div>
 </div>
 
 </body>

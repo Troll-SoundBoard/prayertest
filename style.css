@@ -7,10 +7,7 @@ body{
 }
 .screen{display:none;min-height:100vh}
 .screen.active{display:block}
-#signup{
-  text-align:center;
-  padding-top:35vh;
-}
+#signup{text-align:center;padding-top:35vh}
 input,button{
   width:90%;
   padding:14px;
@@ -55,7 +52,6 @@ li{
   display:flex;
   justify-content:space-between;
   cursor:pointer;
-  transition:.2s;
 }
 li.checked{background:#16a34a}
 .nav{
@@ -74,3 +70,42 @@ li.checked{background:#16a34a}
   font-size:15px;
 }
 .nav button.active{color:#3b82f6}
+
+/* Settings UI */
+.settings .card{
+  background:#1e293b;
+  padding:16px;
+  border-radius:16px;
+  margin-bottom:16px;
+}
+.settings .danger{
+  background:#3f1d1d;
+}
+.settings h3{
+  margin-top:0;
+}
+
+/* Modal */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.modal.hidden{display:none}
+.modal-box{
+  background:#020617;
+  padding:20px;
+  border-radius:16px;
+  width:85%;
+  text-align:center;
+}
+.modal-actions{
+  display:flex;
+  gap:10px;
+}
+.modal-actions button{
+  flex:1;
+}

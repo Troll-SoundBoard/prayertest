@@ -4,7 +4,6 @@ const error=document.getElementById('error');
 
 let locationName='';
 
-// ---------- LOCATION (CITY, COUNTRY) ----------
 navigator.geolocation.getCurrentPosition(async pos=>{
   const {latitude,longitude}=pos.coords;
   try{
@@ -16,11 +15,8 @@ navigator.geolocation.getCurrentPosition(async pos=>{
   }catch{
     locationText.innerText='Location detected';
   }
-},()=>{
-  locationText.innerText='Location permission denied';
 });
 
-// ---------- SIGNUP ----------
 enter.onclick=()=>{
   const u=username.value.trim();
   if(!u){
@@ -28,18 +24,12 @@ enter.onclick=()=>{
     return;
   }
   localStorage.setItem('user',JSON.stringify({u,locationName}));
-  document.getElementById('signup').classList.remove('active');
-  document.getElementById('app').classList.add('active');
+  signup.classList.remove('active');
+  app.classList.add('active');
   userInfo.innerText='Hi '+u;
 };
 
-// ---------- SIGNOUT ----------
-signout.onclick=()=>{
-  localStorage.clear();
-  location.reload();
-};
-
-// ---------- PRAYERS ----------
+// PRAYERS
 let state=JSON.parse(localStorage.getItem('state'))||{};
 function renderPrayers(){
   list.innerHTML='';
@@ -56,21 +46,29 @@ function renderPrayers(){
   });
 }
 
-// ---------- NAVBAR (FIXED) ----------
+// NAV
 document.querySelectorAll('.nav button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
+  btn.onclick=()=>{
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(btn.dataset.target).classList.add('active');
     document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-  });
+  };
 });
 
-// ---------- AUTO LOGIN ----------
+// MODAL
+signout.onclick=()=>modal.classList.remove('hidden');
+cancel.onclick=()=>modal.classList.add('hidden');
+confirm.onclick=()=>{
+  localStorage.clear();
+  location.reload();
+};
+
+// AUTO LOGIN
 const user=JSON.parse(localStorage.getItem('user'));
 if(user){
-  document.getElementById('signup').classList.remove('active');
-  document.getElementById('app').classList.add('active');
+  signup.classList.remove('active');
+  app.classList.add('active');
   userInfo.innerText='Hi '+user.u;
   if(user.locationName) where.innerText='📍 '+user.locationName;
 }
