@@ -3,14 +3,14 @@ body{margin:0;font-family:-apple-system;background:#020617;color:white}
 .hidden{display:none}
 #signup{text-align:center;padding-top:40vh}
 input,button{width:100%;padding:14px;margin:10px 0;border-radius:12px;border:none}
+#error{color:#f87171;min-height:18px}
 #sky{text-align:center;padding:30px;background:linear-gradient(#020617,#1e293b)}
 #moon{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#fff,#bbb);margin:0 auto;box-shadow:0 0 50px rgba(255,255,255,.9)}
 #stars{position:absolute;inset:0;background:radial-gradient(white 1px, transparent 1px);background-size:40px 40px;opacity:.25}
 #streak{margin-top:12px}
 ul{list-style:none;padding:0}
-li{padding:14px;margin-bottom:10px;background:#1e293b;border-radius:14px;display:flex;justify-content:space-between}
+li{padding:14px;margin-bottom:10px;background:#1e293b;border-radius:14px;display:flex;justify-content:space-between;cursor:pointer}
 li.checked{background:#16a34a}
 .nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#020617}
 .nav button{background:none;border:none;color:#64748b;padding:14px}
 .nav button.active{color:#3b82f6}
-#calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}

@@ -1,5 +1,6 @@
 const prayers=['Fajr','Dhuhr','Asr','Maghrib','Isha']
 const list=document.getElementById('prayers')
+const error=document.getElementById('error')
 let coords=null
 
 navigator.geolocation.getCurrentPosition(pos=>{
@@ -9,7 +10,15 @@ navigator.geolocation.getCurrentPosition(pos=>{
 
 function startApp(){
   const u=username.value.trim()
-  if(!u||!coords) return
+  if(!u){
+    error.innerText='Username is required'
+    return
+  }
+  if(!coords){
+    error.innerText='Location required'
+    return
+  }
+  error.innerText=''
   localStorage.setItem('user',JSON.stringify({u,coords}))
   signup.classList.add('hidden')
   app.classList.remove('hidden')
@@ -29,14 +38,13 @@ function render(){
     const li=document.createElement('li')
     if(state[p]) li.classList.add('checked')
     li.innerHTML=`${p}<span>${state[p]?'✓':''}</span>`
-    li.onclick=()=>{state[p]=!state[p];save()}
+    li.onclick=()=>{
+      state[p]=!state[p]
+      localStorage.setItem('state',JSON.stringify(state))
+      render()
+    }
     list.appendChild(li)
   })
-}
-
-function save(){
-  localStorage.setItem('state',JSON.stringify(state))
-  render()
 }
 
 function show(id,btn){
