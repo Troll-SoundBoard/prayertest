@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrayerTrack</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>PrayerTrack</h1>
+</header>
+
+<main>
+  <section id="home" class="screen active">
+    <h2>Today's Prayers</h2>
+    <div id="prayers"></div>
+    <div class="next" id="nextPrayer"></div>
+  </section>
+
+  <section id="history" class="screen">
+    <h2>History</h2>
+    <div id="calendar"></div>
+  </section>
+
+  <section id="profile" class="screen">
+    <h2>Profile</h2>
+    <input id="username" placeholder="Username">
+    <button onclick="useGPS()">📍 Use GPS</button>
+    <select id="method">
+      <option value="2">MWL</option>
+      <option value="4">Umm al-Qura</option>
+      <option value="3">ISNA</option>
+    </select>
+    <input type="file" id="avatarInput" accept="image/*">
+    <img id="avatar" class="avatar">
+    <button onclick="saveProfile()">Save</button>
+  </section>
+</main>
+
+<nav class="bottom-nav">
+  <button onclick="show('home')" class="active">🏠</button>
+  <button onclick="show('history')">📆</button>
+  <button onclick="show('profile')">👤</button>
+</nav>
+
+<audio id="athan" src="athan.mp3"></audio>
+<script src="app.js"></script>
+</body>
+</html>
