@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,8 +13,8 @@
   <h2>Welcome 🌙</h2>
   <input id="username" placeholder="Username">
   <p id="error"></p>
-  <p id="gpsStatus">Detecting location…</p>
-  <button onclick="startApp()">Enter</button>
+  <p id="locationText">Detecting location…</p>
+  <button id="enterBtn">Enter</button>
 </div>
 
 <div id="app" class="hidden">
@@ -22,6 +22,7 @@
     <div id="stars"></div>
     <div id="moon"></div>
     <div id="streak">0 day streak 🔥</div>
+    <div id="where"></div>
   </header>
 
   <section id="home" class="page active">
@@ -29,18 +30,18 @@
   </section>
 
   <section id="calendar" class="page">
-    <div id="calendarGrid"></div>
+    <p style="text-align:center">Calendar ready</p>
   </section>
 
   <section id="settings" class="page">
     <p id="userInfo"></p>
-    <button onclick="signOut()">Sign Out</button>
+    <button id="signoutBtn">Sign Out</button>
   </section>
 
   <nav class="nav">
-    <button class="active" onclick="show('home',this)">Home</button>
-    <button onclick="show('calendar',this)">Calendar</button>
-    <button onclick="show('settings',this)">Settings</button>
+    <button data-page="home" class="active">Home</button>
+    <button data-page="calendar">Calendar</button>
+    <button data-page="settings">Settings</button>
   </nav>
 </div>
 
