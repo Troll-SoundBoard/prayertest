@@ -9,39 +9,38 @@
 </head>
 <body>
 
-<header id="top">
-  <div id="streak">0 day streak 🔥</div>
-</header>
-
-<section id="home" class="page active">
-  <ul id="prayers"></ul>
-</section>
-
-<section id="calendar" class="page">
-  <div id="calendarGrid"></div>
-</section>
-
-<section id="settings" class="page">
-  <label>Username</label>
-  <input id="username" placeholder="Your name">
-  <label>Location</label>
+<div id="signup" class="page active">
+  <h2>Welcome 🌙</h2>
+  <input id="username" placeholder="Username">
   <input id="location" placeholder="City, Country">
-  <button id="save">Save</button>
-  <button id="signout">Sign Out</button>
-</section>
+  <button onclick="startApp()">Enter</button>
+</div>
 
-<nav class="nav">
-  <button onclick="show('home',this)" class="active">Home</button>
-  <button onclick="show('calendar',this)">Calendar</button>
-  <button onclick="show('settings',this)">Settings</button>
-</nav>
+<div id="app" class="hidden">
+  <header id="sky">
+    <div id="stars"></div>
+    <div id="moon"></div>
+    <div id="streak">0 day streak 🔥</div>
+  </header>
 
-<div id="modal" class="hidden">
-  <div class="box">
-    <p>Signing out will erase all streaks and history.</p>
-    <button onclick="confirmSignOut()">Confirm</button>
-    <button onclick="closeModal()">Cancel</button>
-  </div>
+  <section id="home" class="page active">
+    <ul id="prayers"></ul>
+  </section>
+
+  <section id="calendar" class="page">
+    <div id="calendarGrid"></div>
+  </section>
+
+  <section id="settings" class="page">
+    <p id="userInfo"></p>
+    <button onclick="signOut()">Sign Out</button>
+  </section>
+
+  <nav class="nav">
+    <button class="active" onclick="show('home',this)">Home</button>
+    <button onclick="show('calendar',this)">Calendar</button>
+    <button onclick="show('settings',this)">Settings</button>
+  </nav>
 </div>
 
 </body>
