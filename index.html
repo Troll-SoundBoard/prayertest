@@ -1,36 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Prayer Tracker</title>
 <link rel="stylesheet" href="style.css">
 <script src="app.js" defer></script>
 </head>
 <body>
 
-<div id="sky">
-  <div id="moon"></div>
+<header id="top">
   <div id="streak">0 day streak 🔥</div>
-</div>
+</header>
 
 <section id="home" class="page active">
   <ul id="prayers"></ul>
 </section>
 
 <section id="calendar" class="page">
-  <p style="text-align:center;">Calendar coming soon</p>
+  <div id="calendarGrid"></div>
 </section>
 
 <section id="settings" class="page">
-  <p style="text-align:center;">Settings coming soon</p>
+  <label>Username</label>
+  <input id="username" placeholder="Your name">
+  <label>Location</label>
+  <input id="location" placeholder="City, Country">
+  <button id="save">Save</button>
+  <button id="signout">Sign Out</button>
 </section>
 
-<nav class="bottom-nav">
-  <button class="active" onclick="showPage('home', this)">Home</button>
-  <button onclick="showPage('calendar', this)">Calendar</button>
-  <button onclick="showPage('settings', this)">Settings</button>
+<nav class="nav">
+  <button onclick="show('home',this)" class="active">Home</button>
+  <button onclick="show('calendar',this)">Calendar</button>
+  <button onclick="show('settings',this)">Settings</button>
 </nav>
+
+<div id="modal" class="hidden">
+  <div class="box">
+    <p>Signing out will erase all streaks and history.</p>
+    <button onclick="confirmSignOut()">Confirm</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
 
 </body>
 </html>

@@ -1,59 +1,16 @@
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background:linear-gradient(#020617,#1e293b);
-  color:white;
-}
-#sky{
-  text-align:center;
-  padding:40px 0;
-}
-#moon{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  background:radial-gradient(circle,#fff,#aaa);
-  margin:0 auto;
-  box-shadow:0 0 40px rgba(255,255,255,.8);
-}
-#streak{margin-top:15px;font-size:18px}
-
+body{margin:0;font-family:-apple-system;background:#020617;color:white}
+header{text-align:center;padding:20px}
 .page{display:none;padding:20px}
 .page.active{display:block}
-
-#prayers{
-  list-style:none;
-  padding:0;
-}
-#prayers li{
-  background:#1e293b;
-  padding:14px;
-  margin-bottom:12px;
-  border-radius:14px;
-  display:flex;
-  justify-content:space-between;
-  cursor:pointer;
-  transition:.2s;
-}
-#prayers li.checked{
-  background:#16a34a;
-}
-
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  background:#020617;
-  padding:10px 0;
-}
-.bottom-nav button{
-  background:none;
-  border:none;
-  color:#64748b;
-  font-size:16px;
-}
-.bottom-nav button.active{
-  color:#3b82f6;
-}
+ul{list-style:none;padding:0}
+li{padding:14px;margin-bottom:10px;background:#1e293b;border-radius:14px;display:flex;justify-content:space-between}
+li.checked{background:#16a34a}
+.nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#020617}
+.nav button{background:none;border:none;color:#64748b;padding:14px}
+.nav button.active{color:#3b82f6}
+#calendarGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{background:#1e293b;padding:10px;border-radius:8px;text-align:center;font-size:12px}
+input,button{width:100%;margin:10px 0;padding:12px;border-radius:10px;border:none}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
+#modal.hidden{display:none}
+.box{background:#020617;padding:20px;border-radius:14px;text-align:center}
