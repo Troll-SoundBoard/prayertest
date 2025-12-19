@@ -8,42 +8,34 @@
 </head>
 <body>
 
-<header class="top">
-  <h1>PrayerTrack</h1>
-</header>
+<section id="signup" class="screen active">
+  <h1>🕌 PrayerTrack</h1>
+  <p>Create your profile to continue</p>
+  <input id="username" placeholder="Username">
+  <button onclick="useGPS()">📍 Use GPS Location</button>
+  <select id="method">
+    <option value="2">Muslim World League</option>
+    <option value="4">Umm al-Qura</option>
+    <option value="3">ISNA</option>
+  </select>
+  <button class="primary" onclick="finishSignup()">Continue</button>
+</section>
 
-<main>
-  <section id="home" class="screen active">
+<section id="app" class="screen">
+  <header class="top">PrayerTrack</header>
+
+  <main>
     <h2>Today's Prayers</h2>
     <div id="prayers"></div>
-    <div class="next" id="nextPrayer"></div>
-  </section>
+    <div id="nextPrayer" class="next"></div>
+  </main>
 
-  <section id="history" class="screen">
-    <h2>History</h2>
-    <div id="calendar"></div>
-  </section>
-
-  <section id="profile" class="screen">
-    <h2>Profile</h2>
-    <input id="username" placeholder="Username">
-    <button onclick="useGPS()">📍 Use GPS</button>
-    <select id="method">
-      <option value="2">MWL</option>
-      <option value="4">Umm al-Qura</option>
-      <option value="3">ISNA</option>
-    </select>
-    <input type="file" id="avatarInput" accept="image/*">
-    <img id="avatar" class="avatar">
-    <button onclick="saveProfile()">Save</button>
-  </section>
-</main>
-
-<nav class="bottom-nav">
-  <button onclick="show('home')" class="active">🏠</button>
-  <button onclick="show('history')">📆</button>
-  <button onclick="show('profile')">👤</button>
-</nav>
+  <nav class="bottom-nav">
+    <button class="active">🏠</button>
+    <button>📆</button>
+    <button>👤</button>
+  </nav>
+</section>
 
 <audio id="athan" src="athan.mp3"></audio>
 <script src="app.js"></script>
