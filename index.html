@@ -11,17 +11,19 @@
 
 <div id="signup" class="screen active">
   <h2>Welcome 🌙</h2>
-  <input id="username" placeholder="Username">
+  <input id="username" placeholder="Username *">
   <p id="error"></p>
   <p id="locationText">Detecting location…</p>
   <button id="enter">Enter</button>
 </div>
 
 <div id="app" class="screen">
-  <header class="sky">
-    <div class="stars"></div>
-    <div class="moon"></div>
-    <div id="streak">0 day streak 🔥</div>
+  <header class="top">
+    <div id="greet">Hi</div>
+    <div id="streakBox" class="hidden">
+      <div class="moon"></div>
+      <div id="streak"></div>
+    </div>
     <div id="where"></div>
   </header>
 
@@ -31,16 +33,17 @@
     </section>
 
     <section id="calendar" class="page">
-      <p style="text-align:center">Calendar ready</p>
+      <div id="calendarGrid"></div>
     </section>
 
-    <section id="settings" class="page settings">
+    <section id="settings" class="page">
       <div class="card">
         <h3>Profile</h3>
-        <p id="userInfo"></p>
+        <input id="editName" placeholder="Username">
+        <input id="bio" placeholder="Bio">
+        <input type="file" id="avatar">
       </div>
       <div class="card danger">
-        <h3>Sign Out</h3>
         <button id="signout">Sign Out</button>
       </div>
     </section>
@@ -58,7 +61,7 @@
     <h3>Sign out?</h3>
     <p>This will erase all streaks and prayer history.</p>
     <div class="modal-actions">
-      <button id="confirm">Yes, sign out</button>
+      <button id="confirm">Yes</button>
       <button id="cancel">Cancel</button>
     </div>
   </div>
