@@ -8,10 +8,12 @@
 </head>
 <body>
 
+<div id="toast"></div>
+
 <section id="signup" class="screen active">
   <h1>🕌 PrayerTrack</h1>
   <input id="usernameInput" placeholder="Username">
-  <button onclick="useGPS()">📍 Use GPS</button>
+  <button class="primary" onclick="useGPS()">📍 Use GPS</button>
   <button class="primary" onclick="finishSignup()">Continue</button>
 </section>
 
@@ -33,6 +35,12 @@
 
     <section id="settings" class="tab">
       <h2>Settings</h2>
+
+      <label>Username</label>
+      <input id="settingsUsername">
+
+      <button onclick="updateLocation()">📍 Update Location</button>
+
       <button class="danger" onclick="confirmSignOut()">Sign Out</button>
     </section>
   </main>

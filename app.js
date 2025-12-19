@@ -7,16 +7,25 @@ if(localStorage.user){
   load();
 }
 
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.innerText=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
 function useGPS(){
   navigator.geolocation.getCurrentPosition(p=>{
     localStorage.lat=p.coords.latitude;
     localStorage.lon=p.coords.longitude;
-    alert('Location saved');
+    toast('Location saved');
   });
 }
 
+function updateLocation(){useGPS()}
+
 function finishSignup(){
-  if(!usernameInput.value||!localStorage.lat)return alert('Complete setup');
+  if(!usernameInput.value||!localStorage.lat)return toast('Complete setup');
   localStorage.user=usernameInput.value;
   signup.classList.remove('active');
   app.classList.add('active');
@@ -25,12 +34,18 @@ function finishSignup(){
 
 async function load(){
   todayTitle.innerText=new Date().toDateString();
+  settingsUsername.value=localStorage.user;
   const res=await fetch(`https://api.aladhan.com/v1/timings?latitude=${localStorage.lat}&longitude=${localStorage.lon}&method=2`);
   const data=await res.json();
   renderPrayers(data.data.timings);
   renderCalendar();
   updateStreak();
 }
+
+settingsUsername.onchange=()=>{
+  localStorage.user=settingsUsername.value;
+  toast('Username updated');
+};
 
 function renderPrayers(times){
   prayerList.innerHTML='';
@@ -83,7 +98,7 @@ function showTab(id,btn){
 }
 
 function confirmSignOut(){
-  if(confirm("Signing out will delete ALL prayer history, streaks, and profile data. Continue?")){
+  if(confirm("Signing out will delete ALL prayer history, streaks, and profile data.")){
     localStorage.clear();location.reload();
   }
 }
