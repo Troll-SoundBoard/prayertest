@@ -25,7 +25,10 @@ function useGPS(){
 function updateLocation(){useGPS()}
 
 function finishSignup(){
-  if(!usernameInput.value||!localStorage.lat)return toast('Complete setup');
+  if(!usernameInput.value||!localStorage.lat){
+    toast('Please enter username and location');
+    return;
+  }
   localStorage.user=usernameInput.value;
   signup.classList.remove('active');
   app.classList.add('active');
@@ -97,10 +100,15 @@ function showTab(id,btn){
   btn.classList.add('active');
 }
 
-function confirmSignOut(){
-  if(confirm("Signing out will delete ALL prayer history, streaks, and profile data.")){
-    localStorage.clear();location.reload();
-  }
+function openSignOut(){
+  modalText.innerText="Signing out will delete ALL prayer history, streaks, and profile data.";
+  modal.classList.add('show');
+}
+
+function closeModal(){modal.classList.remove('show')}
+
+function doSignOut(){
+  localStorage.clear();location.reload();
 }
 
 function format(t){
