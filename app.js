@@ -2,72 +2,88 @@ const prayers=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
 const today=new Date().toISOString().slice(0,10);
 let data=JSON.parse(localStorage.getItem('data'))||{history:{},profile:{}};
 
-navigator.geolocation.getCurrentPosition(async pos=>{
- const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`);
- const d=await r.json();
- const loc=`${d.address.country}, ${d.address.city||d.address.town||d.address.village}`;
- locationText.innerText='📍 '+loc;
- where.innerText='📍 '+loc;
- data.profile.location=loc;
- localStorage.setItem('data',JSON.stringify(data));
-});
+function moonPhase(){
+ const d=new Date();
+ const lp=2551443;
+ const now=d.getTime()/1000;
+ const new_moon=592500;
+ const phase=((now-new_moon)%lp)/lp;
+ return phase;
+}
+
+function renderMoon(){
+ const p=moonPhase();
+ moon.style.boxShadow=`0 0 ${30+50*p}px white`;
+}
 
 enter.onclick=()=>{
- if(!username.value.trim()){error.innerText='Username is required';return;}
- data.profile.name=username.value.trim();
+ if(!username.value.trim()){error.innerText='Username required';return;}
+ data.profile.name=username.value;
  localStorage.setItem('data',JSON.stringify(data));
  signup.classList.remove('active');app.classList.add('active');
  init();
 };
 
 function init(){
- greet.innerText=data.profile.name;
- editName.value=data.profile.name||'';
- bio.value=data.profile.bio||'';
- renderPrayers();renderCalendar();calcStreak();
+ greet.innerText='Hi '+data.profile.name;
+ editName.value=data.profile.name;
+ if(data.profile.avatar) navAvatar.style.background=`url(${data.profile.avatar}) center/cover`;
+ renderPrayers();renderCalendar();calcStreak();renderMoon();
 }
 
 function renderPrayers(){
+ prayersEl.innerHTML='';
+ if(!data.history[today]) data.history[today]={};
  prayers.forEach(p=>{
-  if(!data.history[today])data.history[today]={};
   const li=document.createElement('li');
   li.className=data.history[today][p]?'checked':'';
   li.innerHTML=`<span>${p}</span><span>${data.history[today][p]?'✓':''}</span>`;
   li.onclick=()=>{
-    data.history[today][p]=!data.history[today][p];
-    localStorage.setItem('data',JSON.stringify(data));
-    li.classList.toggle('checked');
+   data.history[today][p]=!data.history[today][p];
+   localStorage.setItem('data',JSON.stringify(data));
+   renderPrayers();renderCalendar();calcStreak();
   };
   prayersEl.appendChild(li);
  });
 }
 
 function renderCalendar(){
- const c=document.getElementById('calendarGrid');
- c.innerHTML='';
+ calendarGrid.innerHTML='';
  const now=new Date();
  const days=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
  for(let i=1;i<=days;i++){
-  const d=document.createElement('div');
-  d.className='day';
-  d.innerText=i;
-  c.appendChild(d);
+  const d=new Date(now.getFullYear(),now.getMonth(),i).toISOString().slice(0,10);
+  const el=document.createElement('div');
+  el.className='day';
+  if(data.history[d] && prayers.every(p=>data.history[d][p])) el.classList.add('full');
+  el.innerText=i;
+  calendarGrid.appendChild(el);
  }
 }
 
 function calcStreak(){
- let streak=0;
+ let s=0;
  for(let i=0;i<30;i++){
   const d=new Date();d.setDate(d.getDate()-i);
   const k=d.toISOString().slice(0,10);
-  if(data.history[k] && prayers.every(p=>data.history[k][p])) streak++;
+  if(data.history[k] && prayers.every(p=>data.history[k][p])) s++;
   else break;
  }
- if(streak>=2){
+ if(s>=2){
   streakBox.classList.remove('hidden');
-  streak.innerText=`${streak} days in a row 🔥`;
+  streak.innerText=`${s} days in a row 🔥`;
  }
 }
+
+avatarInput.onchange=e=>{
+ const r=new FileReader();
+ r.onload=()=>{
+  data.profile.avatar=r.result;
+  localStorage.setItem('data',JSON.stringify(data));
+  navAvatar.style.background=`url(${r.result}) center/cover`;
+ };
+ r.readAsDataURL(e.target.files[0]);
+};
 
 signout.onclick=()=>modal.classList.remove('hidden');
 cancel.onclick=()=>modal.classList.add('hidden');
